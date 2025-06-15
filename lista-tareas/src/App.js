@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import Tarea from "./components/Tarea.jsx";
+import Formulario from "./components/Formulario.jsx";
 
 function App() {
   const [tarea, setTarea ] = useState("");
@@ -21,13 +22,7 @@ function App() {
   return (
     <div className="App">
       <h1>Lista de Tareas</h1>
-      <input
-        type="text"
-        value={tarea}
-        onChange={(e) => setTarea(e.target.value)}
-        placeholder="Escribe una tarea"
-      />
-      <button onClick={agregarTarea}>Agregar</button>
+      <Formulario tarea={tarea} setTarea={setTarea} agregarTarea={agregarTarea}/>
       <ul>
         {lista.map((t, index) => (
         <Tarea key={index} texto={t} onBorrar={()=>borrarTarea(index)}/>  
