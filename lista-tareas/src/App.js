@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Tarea from "./components/Tarea.jsx";
 
 function App() {
   const [tarea, setTarea ] = useState("");
@@ -29,9 +30,7 @@ function App() {
       <button onClick={agregarTarea}>Agregar</button>
       <ul>
         {lista.map((t, index) => (
-          <li key={index}>
-            {t} <button onClick={() => borrarTarea(index)}>❌</button>
-          </li>
+        <Tarea key={index} texto={t} onBorrar={()=>borrarTarea(index)}/>  
         ))}
       </ul>
     </div>
