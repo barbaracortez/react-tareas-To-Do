@@ -1,8 +1,9 @@
-function Tarea ({ texto, borrar}) {
+function Tarea ({ texto, onBorrar}) {
     return (
-      <li>
-        {texto} <button onClick={borrar}>❌</button>
-      </li>
+      <div className="tarea">
+        <span>{texto}</span>
+        <button onClick={onBorrar}>❌</button>
+      </div>
     );
 }
 
