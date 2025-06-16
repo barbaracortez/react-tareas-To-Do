@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import Tarea from "./components/Tarea.jsx";
 import Formulario from "./components/Formulario.jsx";
+import ListaDeTareas from "./components/ListaDeTareas.jsx";
+import Tarea from "./components/Tarea.jsx";
+
 
 function App() {
   const [tarea, setTarea ] = useState("");
-  const [lista, setLista ] = useState([]);
+  const [lista, setLista] = useState(()=>{
+    try {
+      const tareasGuardadas = JSON.parse(localStorage.getItem("tareas"));
+      return Array.isArray(tareasGuardadas) ? tareasGuardadas : [];
+    } catch (error) {
+      console.warn("Error al leer tareas desde Local:", error);
+    }
+  });
+
+  
+  useEffect(()=>{
+    localStorage.setItem("tareas", JSON.stringify(lista));
+  },[lista]);
 
   const agregarTarea = () => {
     if (tarea.trim() !== "") {
@@ -15,19 +29,16 @@ function App() {
   };
 
   const borrarTarea = (index) => {
-    const nuevaLista = lista.filter((_, i )=> i !== index);
-    setLista(nuevaLista); 
+    const nuevaLista = [...lista];
+    nuevaLista.splice(index, 1);
+    setLista(nuevaLista);
   };
 
   return (
     <div className="App">
       <h1>Lista de Tareas</h1>
       <Formulario tarea={tarea} setTarea={setTarea} agregarTarea={agregarTarea}/>
-      <ul>
-        {lista.map((t, index) => (
-        <Tarea key={index} texto={t} onBorrar={()=>borrarTarea(index)}/>  
-        ))}
-      </ul>
+      <ListaDeTareas lista ={lista} onBorrar={borrarTarea}/>
     </div>
   );
 }
