@@ -23,10 +23,20 @@ function App() {
 
   const agregarTarea = () => {
     if (tarea.trim() !== "") {
-      setLista([...lista, tarea]);
+      const nuevaTarea = {
+        texto: tarea,
+        completada:false,
+      };
+      setLista([...lista, nuevaTarea]);
       setTarea("");
     }
   };
+
+  const alternarCompletada = (index) => {
+    const listaActualizada = [...lista];
+    listaActualizada[index].completada = !listaActualizada[index].completada;
+    setLista(listaActualizada)
+  }
 
   const borrarTarea = (index) => {
     const nuevaLista = [...lista];
@@ -37,8 +47,8 @@ function App() {
   return (
     <div className="App">
       <h1>Lista de Tareas</h1>
-      <Formulario tarea={tarea} setTarea={setTarea} agregarTarea={agregarTarea}/>
-      <ListaDeTareas lista ={lista} onBorrar={borrarTarea}/>
+      <Formulario Tarea={Tarea} setTarea={setTarea} agregarTarea={agregarTarea}/>
+      <ListaDeTareas lista ={lista} onBorrar={borrarTarea} onAlternar={alternarCompletada}/>
     </div>
   );
 }
