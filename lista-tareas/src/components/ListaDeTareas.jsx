@@ -1,12 +1,19 @@
 import Tarea from "./Tarea";
 
-function ListaDeTareas ({ lista, onBorrar}) {
+function ListaDeTareas ({ lista, onBorrar, onAlternar}) {
     return (
-        <div className="lista-tareas">
-            {lista.map((t, i)=>(
-               <Tarea key={i} texto={t} onBorrar={()=> onBorrar(i)} />
+        <ul className="lista-tareas">
+            {lista.filter((t)=> t && typeof t.texto === "string")
+            .map((t, index)=>(
+               <Tarea 
+                    key={index} 
+                    texto={t.texto} 
+                    completada={t.completada}
+                    onBorrar={()=>onBorrar(index)}
+                    onAlternar={()=>onAlternar(index)}
+                />
             ))}
-        </div>
+        </ul>
     );
 }
 
