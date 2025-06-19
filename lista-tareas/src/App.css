@@ -42,3 +42,16 @@ li button {
   border-radius: 4px;
   padding: 5px 10px;
 }
+
+.tarea {
+  cursor:pointer;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tarea.completada {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

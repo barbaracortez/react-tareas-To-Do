@@ -1,16 +1,13 @@
 function Tarea ({ texto, onBorrar , completada, onAlternar}) {
     return (
-      <li>
-        <span
-          style={{
-            textDecoration: completada ? "line-through" : "none",
-            cursor: "pointer", marginBottom: "10px",
-          }}
-          onClick={onAlternar}
-        >
-        {texto}
-        </span>
-        <button onClick={onBorrar} style={{ marginLeft:"10px"}}>❌</button>
+      <li 
+      className={`tarea ${completada ? "completada " : ""}`}
+      onClick={onAlternar}> 
+      {texto}
+        <button onClick={(e) => {
+        e.stopPropagation();
+        onBorrar();
+    }}>❌</button>
       </li>
     );
 }
