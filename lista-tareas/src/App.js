@@ -44,11 +44,17 @@ function App() {
     setLista(nuevaLista);
   };
 
+  const editarTarea = (index, nuevoTexto) => {
+    const listaActualizada = [...lista];
+    listaActualizada[index].texto = nuevoTexto;
+    setLista(listaActualizada)
+  }
   return (
     <div className="App">
       <h1>Lista de Tareas</h1>
       <Formulario Tarea={Tarea} setTarea={setTarea} agregarTarea={agregarTarea}/>
-      <ListaDeTareas lista ={lista} onBorrar={borrarTarea} onAlternar={alternarCompletada}/>
+      <ListaDeTareas lista ={lista} onBorrar={borrarTarea} onAlternar={alternarCompletada}
+      onEditar={editarTarea}/>
     </div>
   );
 }

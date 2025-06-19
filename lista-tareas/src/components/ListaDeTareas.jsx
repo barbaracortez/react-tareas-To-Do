@@ -11,6 +11,16 @@ function ListaDeTareas ({ lista, onBorrar, onAlternar}) {
                     completada={t.completada}
                     onBorrar={()=>onBorrar(index)}
                     onAlternar={()=>onAlternar(index)}
+                    onEditar={(nuevoTexto) => {
+                        const listaActulizada = [...lista];
+                        listaActulizada[index].texto = nuevoTexto
+                        onBorrar(index);
+                        listaActulizada.splice(index, 0 , {
+                            texto: nuevoTexto,
+                            completada: t.completada,
+                        });
+                        onAlternar(index);
+                        }}
                 />
             ))}
         </ul>
