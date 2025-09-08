@@ -1,95 +1,69 @@
-.App {
+.app {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
   text-align: center;
-  margin-top: 40px;
-  font-family: sans-serif;
+  background: #1e1e2f;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
 }
 
-input {
-  padding: 8px;
-  width: 200px;
-  margin-right: 10px;
+h1 {
+  margin-bottom: 20px;
 }
 
-button {
-  padding: 8px;
-  margin-left: 5px;
+.formulario {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.formulario input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+}
+
+.formulario button {
+  padding: 10px 15px;
+  border: none;
+  background: #4cafef;
+  color: #fff;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-button {
-  padding: 8px;
-  margin-left: 5px;
-  cursor: pointer; 
-}
-
-li { 
-  margin: 10px auto;
+.lista-tareas {
   list-style: none;
-  background-color: #f0f0f0;
-  padding: 10px;
-  width: 300px;
-  text-align: left;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-li button {
-  background-color: crimson;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
+  padding: 0;
 }
 
 .tarea {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  cursor:pointer;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.tarea.completada {
-  text-decoration: line-through;
-  opacity: 0.5;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #2c2c44;
+  border-radius: 8px;
 }
 
 .tarea span {
-  flex-grow: 1;
-  text-align: left;
   cursor: pointer;
-}
-
-.tarea input [type="text"]{
-  padding: 6px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 200px;
-  margin-right: 5px;
 }
 
 .tarea.completada span {
   text-decoration: line-through;
-  color: gray;
+  opacity: 0.7;
 }
 
 .tarea button {
-  padding: 6px 8px;
-  font-size: 14px;
-  cursor: pointer;
   border: none;
-  border-radius: 4px;
-  background-color: #ddd;
-  transition: background-color 0.2s ease;
-}
-
-.tarea button:hover {
-  background-color: #bbb;
+  background: transparent;
+  color: #ff5555;
+  cursor: pointer;
+  font-size: 18px;
 }

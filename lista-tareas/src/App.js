@@ -1,60 +1,43 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Formulario from "./components/Formulario.jsx";
-import ListaDeTareas from "./components/ListaDeTareas.jsx";
-import Tarea from "./components/Tarea.jsx";
-
+import Formulario from "./components/Formulario";
+import ListaDeTareas from "./components/ListaDeTareas";
 
 function App() {
-  const [tarea, setTarea ] = useState("");
-  const [lista, setLista] = useState(()=>{
-    try {
-      const tareasGuardadas = JSON.parse(localStorage.getItem("tareas"));
-      return Array.isArray(tareasGuardadas) ? tareasGuardadas : [];
-    } catch (error) {
-      console.warn("Error al leer tareas desde Local:", error);
-    }
+  const [tareas, setTareas] = useState(() => {
+    const saved = localStorage.getItem("tareas");
+    return saved ? JSON.parse(saved) : [];
   });
 
-  
-  useEffect(()=>{
-    localStorage.setItem("tareas", JSON.stringify(lista));
-  },[lista]);
+  // Guardar en localStorage cada vez que cambien
+  useEffect(() => {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+  }, [tareas]);
 
-  const agregarTarea = () => {
-    if (tarea.trim() !== "") {
-      const nuevaTarea = {
-        texto: tarea,
-        completada:false,
-      };
-      setLista([...lista, nuevaTarea]);
-      setTarea("");
-    }
+  const agregarTarea = (texto) => {
+    if (texto.trim() === "") return;
+    setTareas([...tareas, { texto, completada: false }]);
   };
 
-  const alternarCompletada = (index) => {
-    const listaActualizada = [...lista];
-    listaActualizada[index].completada = !listaActualizada[index].completada;
-    setLista(listaActualizada)
-  }
-
-  const borrarTarea = (index) => {
-    const nuevaLista = [...lista];
-    nuevaLista.splice(index, 1);
-    setLista(nuevaLista);
+  const eliminarTarea = (index) => {
+    setTareas(tareas.filter((_, i) => i !== index));
   };
 
-  const editarTarea = (index, nuevoTexto) => {
-    const listaActualizada = [...lista];
-    listaActualizada[index].texto = nuevoTexto;
-    setLista(listaActualizada)
-  }
+  const toggleCompletar = (index) => {
+    const nuevas = [...tareas];
+    nuevas[index].completada = !nuevas[index].completada;
+    setTareas(nuevas);
+  };
+
   return (
-    <div className="App">
+    <div className="app">
       <h1>Lista de Tareas</h1>
-      <Formulario Tarea={Tarea} setTarea={setTarea} agregarTarea={agregarTarea}/>
-      <ListaDeTareas lista ={lista} onBorrar={borrarTarea} onAlternar={alternarCompletada}
-      onEditar={editarTarea}/>
+      <Formulario agregarTarea={agregarTarea} />
+      <ListaDeTareas
+        tareas={tareas}
+        eliminarTarea={eliminarTarea}
+        toggleCompletar={toggleCompletar}
+      />
     </div>
   );
 }
