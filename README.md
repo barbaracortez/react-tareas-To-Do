@@ -3,8 +3,7 @@
 Aplicación web para gestionar tareas: agregar, marcar como completadas y eliminar, creada con React.
 
 ##  Demo
-- **Live**: *(pendiente deploy con GitHub Pages)*
-- **Repo**: este
+react-tareas-a-hacer.vercel.app
 
 ##  Objetivo
 - Practicar el manejo de estado y eventos en React.
